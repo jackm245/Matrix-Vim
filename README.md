@@ -14,8 +14,6 @@
 
 ![Image 2](media/image_2.png)
 
-![Image 3](media/image_3.png)
-
 ## Installation
 
 Install by running a single command
