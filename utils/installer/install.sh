@@ -15,7 +15,7 @@ installnodeubuntu() {
 }
 
 moveoldnvim() {
-	echo "Not installing IceVim"
+	echo "Not installing Matrix Vim"
 	echo "Please move your ~/.config/nvim folder before installing"
 	exit
 }
@@ -77,14 +77,9 @@ installpacker() {
 }
 
 cloneconfig() {
-	echo "Cloning IceVim configuration"
-	# git clone https://github.com/jackm245/IceVim.git ~/.config/nvim
-	git clone https://github.com/jackm245/IceVim ~/.config/nvim
-	# mv $HOME/.config/nvim/init.lua $HOME/.config/nvim/init.lua.tmp
-	# mv $HOME/.config/nvim/utils/init.lua $HOME/.config/nvim/init.lua
-	nvim -u $HOME/.config/nvim/init.vim +PackerInstall
-	# rm $HOME/.config/nvim/init.lua
-	# mv $HOME/.config/nvim/init.lua.tmp $HOME/.config/nvim/init.lua
+	echo "Cloning Matrix Vim configuration"
+	git clone https://github.com/jackm245/matrix-vim ~/.config/nvim
+	nvim -u $HOME/.config/nvim/init.vim +PackerSync
 }
 
 asktoinstallnode() {
@@ -143,7 +138,7 @@ installextrapackages() {
 }
 
 # Welcome
-echo 'Installing IceVim'
+echo 'Installing Matrix Vim'
 
 # move old nvim directory if it exists
 [ -d "$HOME/.config/nvim" ] && moveoldnvim
