@@ -112,21 +112,42 @@ return require('packer').startup(function(use)
   use {'mboughaba/i3config.vim'}
 
   -- completion
+  -- use {
+      -- 'folke/trouble.nvim',
+      -- config = function()
+          -- require('core.mv-trouble')
+      -- end
+  -- }
+
   use {
     'hrsh7th/nvim-cmp',
+    requires = {
+        { "hrsh7th/cmp-buffer" },
+        { "hrsh7th/cmp-nvim-lsp" },
+        { "hrsh7th/cmp-path" },
+        { "hrsh7th/cmp-nvim-lua" },
+        { "ray-x/cmp-treesitter" },
+        { "hrsh7th/nvim-cmp" },
+        { "hrsh7th/cmp-vsnip" },
+        { "hrsh7th/vim-vsnip" },
+        { "Saecki/crates.nvim" },
+        { "f3fora/cmp-spell" },
+        -- { "hrsh7th/cmp-cmdline" },
+        { "tamago324/cmp-zsh" },
+    },
     config = function()
       require('core.mv-nvimcmp')
-    end
+  end,
   }
-  use {'neovim/nvim-lspconfig'}
-  use {'hrsh7th/cmp-nvim-lsp'}
-  use {'hrsh7th/cmp-buffer'}
-  use {"hrsh7th/cmp-path"}
-  use {"hrsh7th/cmp-nvim-lua"}
-  use {"saadparwaiz1/cmp_luasnip"}
-  use {"tamago324/cmp-zsh"}
   use {"wbthomason/lsp-status.nvim"}
+  use {"saadparwaiz1/cmp_luasnip"}
   use {"onsails/lspkind-nvim"}
+  use {'neovim/nvim-lspconfig'}
+  use {"ray-x/lsp_signature.nvim",
+    config = function()
+        require('core.mv-lspsignature')
+    end,
+    }
   -- searching
   use {'kien/ctrlp.vim'}
 
@@ -187,7 +208,13 @@ return require('packer').startup(function(use)
 
   -- colorschemes
   use {'nekonako/xresources-nvim'}
+
+  use {'github/copilot.vim'}
+
+  -- latex
+  use {'lervag/vimtex'}
 end)
+
 
 --  automatically run :PackerCompile whenever plugins.lua is updated
 -- vim.cmd([[autocmd BufWritePost plugins.lua source <afile> | PackerSync]])

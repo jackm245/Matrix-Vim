@@ -45,7 +45,7 @@ vim.bo.undofile = true
 -- window
 vim.wo.number = true
 vim.wo.relativenumber = true
-vim.wo.wrap = false
+vim.wo.wrap = true
 vim.wo.signcolumn= 'yes'
 
 -- vim cmds

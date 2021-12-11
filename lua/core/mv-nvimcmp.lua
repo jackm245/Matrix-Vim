@@ -36,11 +36,25 @@ cmp.setup {
     { name = "nvim_lua" },
     -- { name = "zsh" },
 
+    -- { name = "nvim_lsp" },
+    -- { name = "path" },
+    -- { name = "luasnip" },
+    -- { name = "buffer", keyword_length = 5 },
     { name = "nvim_lsp" },
+    { name = "treesitter" },
+    { name = "vsnip" },
     { name = "path" },
-    { name = "luasnip" },
-    { name = "buffer", keyword_length = 5 },
-  },
+    { name = "look" },
+    { name = "buffer",
+      options = {
+        get_bufnrs = function()
+          return vim.api.nvim_list_bufs()
+        end,
+      },
+    },
+    { name = "spell" },
+
+},
 
   snippet = {
     expand = function(args)
@@ -48,22 +62,42 @@ cmp.setup {
     end,
   },
 
+  -- formatting = {
+    -- format = lspkind.cmp_format {
+      -- with_text = true,
+      -- menu = {
+        -- buffer = "[buf]",
+        -- nvim_lsp = "[LSP]",
+        -- nvim_lua = "[api]",
+        -- path = "[path]",
+        -- -- luasnip = "[snip]",
+        -- -- gh_issues = "[issues]",
+      -- },
+    -- },
+  -- },
   formatting = {
-    format = lspkind.cmp_format {
-      with_text = true,
-      menu = {
-        buffer = "[buf]",
-        nvim_lsp = "[LSP]",
-        nvim_lua = "[api]",
-        path = "[path]",
-        -- luasnip = "[snip]",
-        -- gh_issues = "[issues]",
-      },
-    },
+    format = function(entry, vim_item)
+      vim_item.kind = string.format("%s %s", lspkind.presets.default[vim_item.kind], vim_item.kind)
+      vim_item.menu = ({
+        nvim_lsp = "ﲳ",
+        nvim_lua = "",
+        treesitter = "",
+        path = "ﱮ",
+        buffer = "﬘",
+        zsh = "",
+        vsnip = "",
+        spell = "暈",
+      })[entry.source.name]
+
+      return vim_item
+    end,
   },
 
   experimental = {
     native_menu = true,
     ghost_text = true,
+  },
+  documentation = {
+    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
   },
 }
